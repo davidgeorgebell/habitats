@@ -1,21 +1,30 @@
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 import { Layout } from "../../components/Layout"
 
-interface CountryProps {
-    name: string
-}
 
-const Country = ({ countryData }: {
-    countryData: {
-        name: string
-    }
-}) => {
+
+const Country = ({ countryData }) => {
     return (
         // TODO make title dynaminc
         <Layout title={countryData.name}>
-            {
-                <h2>{countryData.name}</h2>
-            }
+            <h2>{countryData.name}</h2>
+            <h4>{countryData.region}</h4>
+            <img src={countryData.flag} alt={`Flag for ${countryData.name}`} width='300' height='200' />
+            <ul>
+                <h4>Languages</h4>
+                {
+                    countryData.languages.map(l => <li>{l.name} </li>)
+                }
+            </ul>
+            <ul>
+                <h4>Currency</h4>
+                {
+                    countryData.currencies.map(c => c.name && <li>
+                        {c.name}{' '}
+                        <span>{c.symbol}</span>
+                    </li>)
+                }
+            </ul>
         </Layout>
     )
 }
