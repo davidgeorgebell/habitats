@@ -3,23 +3,29 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Layout } from '../components/Layout'
 
-
+export const regions = [
+  { region: 'africa' }, { region: 'asia' }, { region: 'america' }, { region: 'europe' }, { region: 'oceania' }
+]
 
 const Home = ({ allCountries }) => {
   const [searchFilter, setSearchFilter] = useState('')
 
   const handleSearchFilter = e => setSearchFilter(e.target.value)
 
+  const handleRegionFilter = region => setSearchFilter(region)
 
-  const searchedCountries = allCountries.filter(country => country.name.toLowerCase().includes(searchFilter))
+  const searchedCountries = allCountries.filter(country => country.name.toLowerCase().includes(searchFilter) || country.region.toLowerCase().includes(searchFilter))
 
   return (
     <Layout title="All Countries">
 
       <h1>Habitats</h1>
       <main>
+        <ul>
+          {regions.map(r => <li key={r.region}><a href='#' onClick={() => handleRegionFilter(r.region)}>{r.region}</a></li>)}
+        </ul>
         <form>
-          <input placeholder='Search for country name' type='text' onChange={handleSearchFilter} />
+          <input placeholder='Search for country name or region' type='text' onChange={handleSearchFilter} />
         </form>
         <ul>
           {
