@@ -22,7 +22,7 @@ const Home = ({ allCountries }) => {
       <h1>Habitats</h1>
       <main>
         <ul>
-          {regions.map(r => <li key={r.region}><a href='#' onClick={() => handleRegionFilter(r.region)}>{r.region}</a></li>)}
+          {regions.map(r => <li key={r.region}><button onClick={() => handleRegionFilter(r.region)}># {r.region}</button></li>)}
         </ul>
         <form>
           <input placeholder='Search for country name or region' type='text' onChange={handleSearchFilter} />
