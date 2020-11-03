@@ -25,41 +25,47 @@ const Country = ({ countryData }) => {
         <Layout title={countryData.name}>
             <Link href='/'>
                 <a>
-                    <button>Back</button>
+                    <button className='my-2 mx-1 text-white font-bold py-2 px-4 rounded bg-teal-500 hover:bg-teal-600'>Back</button>
                 </a>
             </Link>
             <h2>{countryData.name}</h2>
-            <h3>Caital city: {countryData.capital}</h3>
-            <h4>Region: {countryData.region}</h4>
+            {countryData.capital && <h3>Caital city: {countryData.capital}</h3>}
+            {countryData.region && <h4>Region: {countryData.region}</h4>}
             <img src={countryData.flag} alt={`Flag for ${countryData.name}`} width='300' height='200' />
-            <ul>
-                <h4>Languages</h4>
-                {
-                    countryData.languages.map(l => <li key={l.name}>{l.name} </li>)
-                }
-            </ul>
-            <ul>
-                <h4>Currency</h4>
-                {
-                    countryData.currencies.map(c => c.name && <li key={c.name}>
-                        {c.name}{' '}
-                        <span>{c.symbol}</span>
-                    </li>)
-                }
-            </ul>
-            <div>
-                <h3>Weather</h3>
-                {capitalCityWeather && capitalCityWeather.weather && capitalCityWeather.main ?
+            {countryData.languages &&
+                <ul>
+                    <h4>Languages</h4>
+                    {
+                        countryData.languages.map(l => <li key={l.name}>{l.name} </li>)
+                    }
+                </ul>
+            }
+            {countryData.currencies &&
+                <ul>
+                    <h4>Currency</h4>
+                    {
+                        countryData.currencies.map(c => c.name && <li key={c.name}>
+                            {c.name}{' '}
+                            <span>{c.symbol}</span>
+                        </li>
+                        )
+                    }
+                </ul>
+            }
+
+            {capitalCityWeather && capitalCityWeather.weather && capitalCityWeather.main ?
+                <div>
+                    <h3>Weather</h3>
                     <ul>
                         <li>Type: {capitalCityWeather.weather[0].main}</li>
                         <li>Main: {Math.round(capitalCityWeather.main.temp)}<span>ºC</span></li>
                         <li>Feels like: {Math.round(capitalCityWeather.main.feels_like)}<span>ºC</span></li>
                         <li>Low: {Math.round(capitalCityWeather.main.temp_min)}<span>ºC</span></li>
                         <li>High: {Math.round(capitalCityWeather.main.temp_max)}<span>ºC</span></li>
-                    </ul> : null
-                }
-
-            </div>
+                    </ul>
+                </div>
+                : null
+            }
         </Layout>
     )
 }
