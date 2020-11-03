@@ -12,7 +12,9 @@ export const Layout: React.FC<LayoutProps> = ({ title, children }) => {
                 <title>{title}</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {children}
+            <main className='container mx-auto max-w-5xl px-4 pt-24'>
+                {children}
+            </main>
         </div>
     );
 }
