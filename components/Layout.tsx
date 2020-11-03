@@ -7,12 +7,12 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ title, children }) => {
     return (
-        <div>
+        <div className='bg-gray-300'>
             <Head>
                 <title>{title}</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main>
+            <main className='container mx-auto max-w-4xl px-4'>
                 {children}
             </main>
         </div>

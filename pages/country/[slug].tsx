@@ -1,9 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from "next"
+import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Layout } from "../../components/Layout"
 
+
+
 const Country = ({ countryData }) => {
-    const [capitalCityWeather, setCapitalCityWeather] = useState([])
+    const [capitalCityWeather, setCapitalCityWeather] = useState(null)
 
     useEffect(() => {
         const getWeather = async () => {
@@ -20,8 +23,14 @@ const Country = ({ countryData }) => {
 
     return (
         <Layout title={countryData.name}>
+            <Link href='/'>
+                <a>
+                    <button>Back</button>
+                </a>
+            </Link>
             <h2>{countryData.name}</h2>
-            <h4>{countryData.region}</h4>
+            <h3>Caital city: {countryData.capital}</h3>
+            <h4>Region: {countryData.region}</h4>
             <img src={countryData.flag} alt={`Flag for ${countryData.name}`} width='300' height='200' />
             <ul>
                 <h4>Languages</h4>
@@ -40,9 +49,16 @@ const Country = ({ countryData }) => {
             </ul>
             <div>
                 <h3>Weather</h3>
-                {capitalCityWeather &&
-                    JSON.stringify(capitalCityWeather)
+                {capitalCityWeather && capitalCityWeather.weather && capitalCityWeather.main ?
+                    <ul>
+                        <li>Type: {capitalCityWeather.weather[0].main}</li>
+                        <li>Main: {Math.round(capitalCityWeather.main.temp)}<span>ºC</span></li>
+                        <li>Feels like: {Math.round(capitalCityWeather.main.feels_like)}<span>ºC</span></li>
+                        <li>Low: {Math.round(capitalCityWeather.main.temp_min)}<span>ºC</span></li>
+                        <li>High: {Math.round(capitalCityWeather.main.temp_max)}<span>ºC</span></li>
+                    </ul> : null
                 }
+
             </div>
         </Layout>
     )
