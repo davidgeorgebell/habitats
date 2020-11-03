@@ -11,6 +11,7 @@ import { Header } from '../components/Header'
 const Home = ({ allCountries }) => {
   const [searchFilter, setSearchFilter] = useState('')
 
+
   const handleSearchFilter = e => setSearchFilter(e.target.value)
 
   const handleRegionFilter = region => setSearchFilter(region)
