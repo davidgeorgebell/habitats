@@ -1,4 +1,3 @@
-import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 
