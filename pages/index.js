@@ -1,12 +1,11 @@
 import { GetStaticProps } from 'next'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import { Layout } from '../components/Layout'
 import { CountryList } from '../components/CountryList'
 import { RegionList } from '../components/RegionList'
 import { Header } from '../components/Header'
-import { Weather } from '../components/Weather'
 
 
 const Home = ({ allCountries }) => {
@@ -40,7 +39,6 @@ const Home = ({ allCountries }) => {
       <Header handleSearchFilter={handleSearchFilter} />
       <Layout title="All Countries">
         <div className='py-10'>
-          <Weather capitalCityWeather={capitalCityWeather} />
           <h1 className='text-center font-bold text-2xl md:text-4xl lg:text-5xl pt-6 pb-8'>Habitats</h1>
           <RegionList handleRegionFilter={handleRegionFilter} />
         </div>

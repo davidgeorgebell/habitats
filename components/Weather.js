@@ -2,7 +2,6 @@ import React from 'react'
 
 export const Weather = ({ capitalCityWeather, countryData }) => {
     return (
-
         <>
             <div className={`${capitalCityWeather.main.temp >= 30 ? 'bg-red-700'
                 :
