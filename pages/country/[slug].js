@@ -41,7 +41,7 @@ const Country = ({ countryData }) => {
                     {countryData.region && <h4><span className='font-bold'>Region:</span> {countryData.region}</h4>}
                     {countryData.languages &&
                         <>
-                            <h4 className='py-2  text-3xl leading-snug'>Languages</h4>
+                            <h4 className='py-1 text-lg leading-snug font-bold'>Languages</h4>
                             <ul className='flex flex-wrap'>
                                 {
                                     countryData.languages.map(l => <li className='m-1 px-2 py-1 rounded shadow bg-gray-300' key={l.name}>{l.name} </li>)
@@ -51,12 +51,12 @@ const Country = ({ countryData }) => {
                     }
                     {countryData.currencies &&
                         <>
-                            <h4 className='py-2 text-3xl leading-snug'>Currency</h4>
-                            <ul >
+                            <h4 className='py-1 text-lg leading-snug font-bold'>Currencies</h4>
+                            <ul className='flex flex-wrap'>
                                 {
-                                    countryData.currencies.map(c => c.name && <li key={c.name}>
+                                    countryData.currencies.map(c => c.name && <li className='m-1' key={c.name}>
                                         {c.name}{' '}
-                                        <span className='py-1 px-2 shadow font-bold bg-gray-300 rounded'>{c.symbol}</span>
+                                        {c.symbol && <span className='py-1 px-2 shadow font-bold bg-gray-300 rounded'>{c.symbol}</span>}
                                     </li>
                                     )
                                 }
@@ -75,7 +75,7 @@ const Country = ({ countryData }) => {
 }
 
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
     try {
         const res = await fetch('https://restcountries.eu/rest/v2/all')
         const json = await res.json()
@@ -95,9 +95,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
     try {
-        const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${params.slug as string}`)
+        const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${params.slug}`)
         const countryData = await res.json()
 
         return {

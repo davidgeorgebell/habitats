@@ -34,7 +34,7 @@ const Home = ({ allCountries }) => {
 }
 
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps = async () => {
   try {
     const res = await fetch('https://restcountries.eu/rest/v2/all')
     const allCountries = await res.json()
