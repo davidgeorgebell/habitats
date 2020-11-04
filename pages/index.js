@@ -11,28 +11,11 @@ import { Header } from '../components/Header'
 const Home = ({ allCountries }) => {
   const [searchFilter, setSearchFilter] = useState('')
 
-
   const handleSearchFilter = e => setSearchFilter(e.target.value)
 
   const handleRegionFilter = region => setSearchFilter(region)
 
   const searchedCountries = allCountries.filter(country => country.name.toLowerCase().includes(searchFilter) || country.region.toLowerCase().includes(searchFilter))
-
-  const [capitalCityWeather, setCapitalCityWeather] = useState(null)
-
-  useEffect(() => {
-    const getWeather = async () => {
-      try {
-        const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${countryData.capital}&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`)
-        const weather = await res.json()
-        setCapitalCityWeather(weather)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    getWeather()
-  }, [])
-
 
   return (
     <>
